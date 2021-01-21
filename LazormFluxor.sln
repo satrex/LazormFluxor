@@ -1,7 +1,7 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T4Test002", "T4Test002\T4Test002.csproj", "{AF704AD6-2174-4B11-8BA7-8311D7CBA033}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LazormFluxorGenerator", "T4Test002\LazormFluxorGenerator.csproj", "{AF704AD6-2174-4B11-8BA7-8311D7CBA033}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

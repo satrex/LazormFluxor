@@ -8,14 +8,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace T4Test002 {
+namespace LazormFluxorGenerator {
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
     using System;
     
     
-    public partial class EffectTemplate : EffectTemplateBase {
+    public partial class ReducerTemplate : ReducerTemplateBase {
         
         public virtual string TransformText() {
             this.GenerationEnvironment = null;
@@ -27,234 +27,285 @@ namespace T4Test002 {
             #line hidden
             
             #line 7 ""
+
+    string EntityClass = entityClassName;
+    string memberEntity = "_" + entityClassName.ToLower();
+    string localEntity = entityClassName.ToLower();
+    string currentEntities = "Current" + entityClassNamePlural;
+
+            
+            #line default
+            #line hidden
+            
+            #line 13 ""
   
-//string[] cruds = new string[] {"Create", "Load", "Update", "Delete"};  \
-string[] cruds = new string[] {"Create"}; 
-string[] actionTypes = new string[] {"", "Success"};
-
-
-string EntityClass = entityClassName;
-string memberEntity = entityClassName;
-string localEntity = entityClassName.ToLower();
-
-   string actionClassName = crud + entityClassName + actionType + "Action"; 
-   string effectClassName = crud + entityClassName + actionType + "Effect"; 
+//string[] cruds = new string[] {"Create", "Load", "Update", "Delete"};
+string stateClassName = entityClassNamePlural + "State";
 
             
             #line default
             #line hidden
             
-            #line 20 ""
-            this.Write("using System.Threading.Tasks;\nusing Fluxor;\nusing Lazorm;\nusing Lazorm.Services;\n" +
-                    "using Lazorm.Store.Features.Todos.Actions.UpdateTodo;\nusing Microsoft.Extensions" +
-                    ".Logging;\n\nnamespace Lazorm.Store.Features.");
+            #line 17 ""
+            this.Write("using System.Collections.Generic;\nusing System.Linq;\nusing Fluxor;\nusing Lazorm;\n" +
+                    "using Lazorm.Store.Features.");
+            
+            #line default
+            #line hidden
+            
+            #line 21 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
+            
+            #line default
+            #line hidden
+            
+            #line 21 ""
+            this.Write("UseCase.Actions.");
+            
+            #line default
+            #line hidden
+            
+            #line 21 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( crud ));
+            
+            #line default
+            #line hidden
+            
+            #line 21 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
+            
+            #line default
+            #line hidden
+            
+            #line 21 ""
+            this.Write(";\nusing Lazorm.Store.States;\n\nnamespace Lazorm.Store.Features.");
+            
+            #line default
+            #line hidden
+            
+            #line 24 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
+            
+            #line default
+            #line hidden
+            
+            #line 24 ""
+            this.Write("UseCase.Reducers\n{\n    #region Reducer\n    public static class ");
             
             #line default
             #line hidden
             
             #line 27 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassNamePlural ));
+            this.Write(this.ToStringHelper.ToStringWithCulture( crud ));
             
             #line default
             #line hidden
             
             #line 27 ""
-            this.Write(".Effects\n{\n    public class ");
+            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
             
             #line default
             #line hidden
             
-            #line 29 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( effectClassName ));
+            #line 27 ""
+            this.Write("ActionsReducer\n    {\n        [ReducerMethod]\n        public static ");
             
             #line default
             #line hidden
             
-            #line 29 ""
-            this.Write(": Effect<");
+            #line 30 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( stateClassName ));
             
             #line default
             #line hidden
             
-            #line 29 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( actionClassName ));
+            #line 30 ""
+            this.Write(" Reduce");
             
             #line default
             #line hidden
             
-            #line 29 ""
-            this.Write(">\n    {\n        private readonly ILogger<");
+            #line 30 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( crud ));
+            
+            #line default
+            #line hidden
+            
+            #line 30 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
+            
+            #line default
+            #line hidden
+            
+            #line 30 ""
+            this.Write("Action(");
+            
+            #line default
+            #line hidden
+            
+            #line 30 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( stateClassName ));
+            
+            #line default
+            #line hidden
+            
+            #line 30 ""
+            this.Write(" state, ");
+            
+            #line default
+            #line hidden
+            
+            #line 30 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( crud ));
+            
+            #line default
+            #line hidden
+            
+            #line 30 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
+            
+            #line default
+            #line hidden
+            
+            #line 30 ""
+            this.Write("Action _)\n        => new ");
             
             #line default
             #line hidden
             
             #line 31 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( effectClassName ));
+            this.Write(this.ToStringHelper.ToStringWithCulture( stateClassName ));
             
             #line default
             #line hidden
             
             #line 31 ""
-            this.Write("> _logger;\n\n        public ");
+            this.Write("(true, null, state.");
             
             #line default
             #line hidden
             
-            #line 33 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( effectClassName ));
+            #line 31 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( currentEntities ));
             
             #line default
             #line hidden
             
-            #line 33 ""
-            this.Write("(ILogger<");
+            #line 31 ""
+            this.Write(", state.CurrentEntity);\n\n        [ReducerMethod]\n        public static ");
             
             #line default
             #line hidden
             
-            #line 33 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( effectClassName ));
+            #line 34 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( stateClassName ));
             
             #line default
             #line hidden
             
-            #line 33 ""
-            this.Write("> logger) =>\n            _logger = logger;\n\n        protected override async Task" +
-                    " HandleAsync(");
+            #line 34 ""
+            this.Write(" Reduce");
+            
+            #line default
+            #line hidden
+            
+            #line 34 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( crud ));
+            
+            #line default
+            #line hidden
+            
+            #line 34 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
+            
+            #line default
+            #line hidden
+            
+            #line 34 ""
+            this.Write("SuccessAction(");
+            
+            #line default
+            #line hidden
+            
+            #line 34 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( stateClassName ));
+            
+            #line default
+            #line hidden
+            
+            #line 34 ""
+            this.Write(" state, ");
+            
+            #line default
+            #line hidden
+            
+            #line 34 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( crud ));
+            
+            #line default
+            #line hidden
+            
+            #line 34 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
+            
+            #line default
+            #line hidden
+            
+            #line 34 ""
+            this.Write("SuccessAction action)\n        {\n");
             
             #line default
             #line hidden
             
             #line 36 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( actionClassName ));
-            
-            #line default
-            #line hidden
-            
-            #line 36 ""
-            this.Write(" action, IDispatcher dispatcher)\n        {\n");
-            
-            #line default
-            #line hidden
-            
-            #line 38 ""
- if (actionType == "") { 
-            
-            #line default
-            #line hidden
-            
-            #line 39 ""
  if (crud == "Load" ) { 
             
             #line default
             #line hidden
             
-            #line 40 ""
-            this.Write("            try\n            {\n                _logger.LogInformation($\"Loading ");
+            #line 37 ""
+            this.Write("            return new ");
             
             #line default
             #line hidden
             
-            #line 42 ""
+            #line 37 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( stateClassName ));
+            
+            #line default
+            #line hidden
+            
+            #line 37 ""
+            this.Write("(false, null, state.");
+            
+            #line default
+            #line hidden
+            
+            #line 37 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( currentEntities ));
+            
+            #line default
+            #line hidden
+            
+            #line 37 ""
+            this.Write(", action.");
+            
+            #line default
+            #line hidden
+            
+            #line 37 ""
             this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
             
             #line default
             #line hidden
             
-            #line 42 ""
-            this.Write(" {action.Id}...\");\n                var ");
+            #line 37 ""
+            this.Write(");\n");
             
             #line default
             #line hidden
             
-            #line 43 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( localEntity ));
-            
-            #line default
-            #line hidden
-            
-            #line 43 ""
-            this.Write("Response = await ");
-            
-            #line default
-            #line hidden
-            
-            #line 43 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
-            
-            #line default
-            #line hidden
-            
-            #line 43 ""
-            this.Write(".GetAsync(action.Id);\n\n                _logger.LogInformation($\"");
-            
-            #line default
-            #line hidden
-            
-            #line 45 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
-            
-            #line default
-            #line hidden
-            
-            #line 45 ""
-            this.Write(" {action.Id} loaded successfully!\");\n                dispatcher.Dispatch(new Load" +
-                    "");
-            
-            #line default
-            #line hidden
-            
-            #line 46 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
-            
-            #line default
-            #line hidden
-            
-            #line 46 ""
-            this.Write("DetailSuccessAction(");
-            
-            #line default
-            #line hidden
-            
-            #line 46 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( localEntity ));
-            
-            #line default
-            #line hidden
-            
-            #line 46 ""
-            this.Write("Response));\n            }\n            catch (Exception e)\n            {\n         " +
-                    "       _logger.LogError($\"Error loading ");
-            
-            #line default
-            #line hidden
-            
-            #line 50 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
-            
-            #line default
-            #line hidden
-            
-            #line 50 ""
-            this.Write(" {action.Id}, reason: {e.Message}\");\n                dispatcher.Dispatch(new Load" +
-                    "");
-            
-            #line default
-            #line hidden
-            
-            #line 51 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
-            
-            #line default
-            #line hidden
-            
-            #line 51 ""
-            this.Write("DetailFailureAction(e.Message));\n            }                \n");
-            
-            #line default
-            #line hidden
-            
-            #line 53 ""
+            #line 38 ""
 
     } /* end Load */
     else if (crud == "Create") {
@@ -263,87 +314,88 @@ string localEntity = entityClassName.ToLower();
             #line default
             #line hidden
             
-            #line 57 ""
-            this.Write("           try\n            {\n                _logger.LogInformation($\"Creating ");
+            #line 42 ""
+            this.Write("            // Grab a reference to the current todo list, or initialize one if we" +
+                    " do not currently have any loaded\n            var currentEntities = state.");
             
             #line default
             #line hidden
             
-            #line 59 ""
+            #line 43 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( currentEntities ));
+            
+            #line default
+            #line hidden
+            
+            #line 43 ""
+            this.Write(" is null ?\n                new List<");
+            
+            #line default
+            #line hidden
+            
+            #line 44 ""
             this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
             
             #line default
             #line hidden
             
-            #line 59 ""
-            this.Write(" {action.");
+            #line 44 ""
+            this.Write(">() :\n                state.");
             
             #line default
             #line hidden
             
-            #line 59 ""
+            #line 45 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( currentEntities ));
+            
+            #line default
+            #line hidden
+            
+            #line 45 ""
+            this.Write(".ToList();\n\n            // Add the newly created todo to our list and sort by ID\n" +
+                    "            currentEntities.Add(action.");
+            
+            #line default
+            #line hidden
+            
+            #line 48 ""
             this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
             
             #line default
             #line hidden
             
-            #line 59 ""
-            this.Write("}...\");\n                var createdEntity = await action.");
+            #line 48 ""
+            this.Write(");\n            currentEntities = currentEntities   \n                .OrderBy(t =>" +
+                    " t.Id)\n                .ToList();\n\n            return new ");
             
             #line default
             #line hidden
             
-            #line 60 ""
+            #line 53 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( stateClassName ));
+            
+            #line default
+            #line hidden
+            
+            #line 53 ""
+            this.Write("(false, null, currentEntities, action.");
+            
+            #line default
+            #line hidden
+            
+            #line 53 ""
             this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
             
             #line default
             #line hidden
             
-            #line 60 ""
-            this.Write(".StoreAsync();\n\n                _logger.LogInformation(\"");
+            #line 53 ""
+            this.Write(");   \n");
             
             #line default
             #line hidden
             
-            #line 62 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
-            
-            #line default
-            #line hidden
-            
-            #line 62 ""
-            this.Write(" created successfully!\");\n                dispatcher.Dispatch(new Create");
-            
-            #line default
-            #line hidden
-            
-            #line 63 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
-            
-            #line default
-            #line hidden
-            
-            #line 63 ""
-            this.Write("SuccessAction(createdEntity));\n            }\n            catch (Exception e)\n    " +
-                    "        {\n                _logger.LogError($\"Could not create todo, reason: {e.M" +
-                    "essage}\");\n                dispatcher.Dispatch(new Create");
-            
-            #line default
-            #line hidden
-            
-            #line 68 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
-            
-            #line default
-            #line hidden
-            
-            #line 68 ""
-            this.Write("FailureAction(e.Message));\n            }\n");
-            
-            #line default
-            #line hidden
-            
-            #line 70 ""
+            #line 54 ""
 
     }  /* end Create */
     else if (crud == "Update" ) {
@@ -352,70 +404,125 @@ string localEntity = entityClassName.ToLower();
             #line default
             #line hidden
             
-            #line 74 ""
-            this.Write("            try\n            {\n                _logger.LogInformation($\"Updating t" +
-                    "odo {action.Id}...\");\n                var updatedEntity = await action.");
+            #line 58 ""
+            this.Write("             // If the current todos list is null, set the state with a new list " +
+                    "containing the updated todo\n            if (state.");
+            
+            #line default
+            #line hidden
+            
+            #line 59 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( currentEntities ));
+            
+            #line default
+            #line hidden
+            
+            #line 59 ""
+            this.Write(" is null)\n            {\n                return new ");
+            
+            #line default
+            #line hidden
+            
+            #line 61 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( stateClassName ));
+            
+            #line default
+            #line hidden
+            
+            #line 61 ""
+            this.Write("(false, null, new List<");
+            
+            #line default
+            #line hidden
+            
+            #line 61 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
+            
+            #line default
+            #line hidden
+            
+            #line 61 ""
+            this.Write(">(), action.");
+            
+            #line default
+            #line hidden
+            
+            #line 61 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
+            
+            #line default
+            #line hidden
+            
+            #line 61 ""
+            this.Write(");   \n            }\n\n            // Rather than mutating in place, let\'s construc" +
+                    "t a new list and add our updated item\n            var updatedList = state.");
+            
+            #line default
+            #line hidden
+            
+            #line 65 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( currentEntities ));
+            
+            #line default
+            #line hidden
+            
+            #line 65 ""
+            this.Write("\n                .Where(t => t.Id != action.");
+            
+            #line default
+            #line hidden
+            
+            #line 66 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
+            
+            #line default
+            #line hidden
+            
+            #line 66 ""
+            this.Write(".Id)\n                .ToList();\n\n            // Add the todo and sort the list\n  " +
+                    "          updatedList.Add(action.");
+            
+            #line default
+            #line hidden
+            
+            #line 70 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
+            
+            #line default
+            #line hidden
+            
+            #line 70 ""
+            this.Write(");\n            updatedList = updatedList\n                .OrderBy(t => t.Id)\n    " +
+                    "            .ToList();\n           \n            return new ");
+            
+            #line default
+            #line hidden
+            
+            #line 75 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( stateClassName ));
+            
+            #line default
+            #line hidden
+            
+            #line 75 ""
+            this.Write("(false, null, updatedList, action.");
+            
+            #line default
+            #line hidden
+            
+            #line 75 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
+            
+            #line default
+            #line hidden
+            
+            #line 75 ""
+            this.Write(")\n            ;\n");
             
             #line default
             #line hidden
             
             #line 77 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
-            
-            #line default
-            #line hidden
-            
-            #line 77 ""
-            this.Write(".StoreAsync();\n               \n                dispatcher.Dispatch(new ");
-            
-            #line default
-            #line hidden
-            
-            #line 79 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( crud ));
-            
-            #line default
-            #line hidden
-            
-            #line 79 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
-            
-            #line default
-            #line hidden
-            
-            #line 79 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( actionType ));
-            
-            #line default
-            #line hidden
-            
-            #line 79 ""
-            this.Write("SuccessAction(updatedEntity));\n            }\n            catch (Exception e)\n    " +
-                    "        {\n                _logger.LogError($\"Could not update todo, reason: {e.M" +
-                    "essage}\");\n                dispatcher.Dispatch(new ");
-            
-            #line default
-            #line hidden
-            
-            #line 84 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( crud ));
-            
-            #line default
-            #line hidden
-            
-            #line 84 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
-            
-            #line default
-            #line hidden
-            
-            #line 84 ""
-            this.Write("FailureAction(e.Message));\n            }\n");
-            
-            #line default
-            #line hidden
-            
-            #line 86 ""
 
     }  /* end Update */
     else if (crud == "Delete" )  {
@@ -424,118 +531,167 @@ string localEntity = entityClassName.ToLower();
             #line default
             #line hidden
             
+            #line 81 ""
+            this.Write("            if(state.");
+            
+            #line default
+            #line hidden
+            
+            #line 81 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( currentEntities ));
+            
+            #line default
+            #line hidden
+            
+            #line 81 ""
+            this.Write(" is null)\n            {\n                return new ");
+            
+            #line default
+            #line hidden
+            
+            #line 83 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( stateClassName ));
+            
+            #line default
+            #line hidden
+            
+            #line 83 ""
+            this.Write("(false, null, null, state.CurrentEntity);\n            }\n\n            var updatedE" +
+                    "ntities = state.");
+            
+            #line default
+            #line hidden
+            
+            #line 86 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( currentEntities ));
+            
+            #line default
+            #line hidden
+            
+            #line 86 ""
+            this.Write(".Where(t => t.Id != action.");
+            
+            #line default
+            #line hidden
+            
+            #line 86 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
+            
+            #line default
+            #line hidden
+            
+            #line 86 ""
+            this.Write(".Id);\n\n            return new ");
+            
+            #line default
+            #line hidden
+            
+            #line 88 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( stateClassName ));
+            
+            #line default
+            #line hidden
+            
+            #line 88 ""
+            this.Write("(false, null, updatedEntities, updatedEntities.Last());\n\n");
+            
+            #line default
+            #line hidden
+            
             #line 90 ""
-            this.Write("            try\n            {\n                _logger.LogInformation($\"Deleting t" +
-                    "odo {action.Id}...\");\n                var droppedEntity = await action.");
+ 
+ } /* end crudType */ 
+
             
             #line default
             #line hidden
             
             #line 93 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
+            this.Write("        }\n\n        [ReducerMethod]\n            public static ");
             
             #line default
             #line hidden
             
-            #line 93 ""
-            this.Write(".DropAsync();\n               \n                dispatcher.Dispatch(new ");
+            #line 96 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( stateClassName ));
             
             #line default
             #line hidden
             
-            #line 95 ""
+            #line 96 ""
+            this.Write(" Reduce");
+            
+            #line default
+            #line hidden
+            
+            #line 96 ""
             this.Write(this.ToStringHelper.ToStringWithCulture( crud ));
             
             #line default
             #line hidden
             
-            #line 95 ""
+            #line 96 ""
             this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
             
             #line default
             #line hidden
             
-            #line 95 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( actionType ));
+            #line 96 ""
+            this.Write("FailureAction(");
             
             #line default
             #line hidden
             
-            #line 95 ""
-            this.Write("SuccessAction(droppedEntity));\n            }\n            catch (Exception e)\n    " +
-                    "        {\n                _logger.LogError($\"Could not update todo, reason: {e.M" +
-                    "essage}\");\n                dispatcher.Dispatch(new ");
+            #line 96 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( stateClassName ));
             
             #line default
             #line hidden
             
-            #line 100 ""
+            #line 96 ""
+            this.Write(" state, ");
+            
+            #line default
+            #line hidden
+            
+            #line 96 ""
             this.Write(this.ToStringHelper.ToStringWithCulture( crud ));
             
             #line default
             #line hidden
             
-            #line 100 ""
+            #line 96 ""
             this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
             
             #line default
             #line hidden
             
-            #line 100 ""
-            this.Write("FailureAction(e.Message));\n            }\n");
+            #line 96 ""
+            this.Write("FailureAction action)\n            => new ");
             
             #line default
             #line hidden
             
-            #line 102 ""
- 
-    } /* end else */ 
- } /* end actionype */ 
- else if (actionType == "Success") { 
- 
+            #line 97 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( stateClassName ));
             
             #line default
             #line hidden
             
-            #line 107 ""
-            this.Write("\n    _logger.LogInformation(\"");
+            #line 97 ""
+            this.Write("(false, action.ErrorMessage, state.");
             
             #line default
             #line hidden
             
-            #line 108 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( crud ));
+            #line 97 ""
+            this.Write(this.ToStringHelper.ToStringWithCulture( currentEntities ));
             
             #line default
             #line hidden
             
-            #line 108 ""
-            this.Write(" ");
-            
-            #line default
-            #line hidden
-            
-            #line 108 ""
-            this.Write(this.ToStringHelper.ToStringWithCulture( entityClassName ));
-            
-            #line default
-            #line hidden
-            
-            #line 108 ""
-            this.Write(" successfully, navigating back to todo listing...\");\n    \n    /*\n        Write co" +
-                    "de for navigating back here\n    */\n\n    return Task.CompletedTask;\n");
-            
-            #line default
-            #line hidden
-            
-            #line 115 ""
- } /* end if */ 
-            
-            #line default
-            #line hidden
-            
-            #line 116 ""
-            this.Write(" \n        }\n    }\n}\n`");
+            #line 97 ""
+            this.Write(", state.CurrentEntity );    \n        \n    }\n}\n    #endregion Reducer\n");
             
             #line default
             #line hidden
@@ -546,7 +702,7 @@ string localEntity = entityClassName.ToLower();
         }
     }
     
-    public class EffectTemplateBase {
+    public class ReducerTemplateBase {
         
         private global::System.Text.StringBuilder builder;
         
